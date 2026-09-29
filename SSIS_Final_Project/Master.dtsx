@@ -1,0 +1,491 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/15/2026 1:15:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ICS-LT-2YLQZ33"
+  DTS:CreatorName="INFICS\skutuwa"
+  DTS:DTSID="{64E7DDFB-8834-4A56-9A8F-33E17F62B463}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{456090DA-E396-43AC-B032-7BFA35F05B98}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{08DD4F8E-6DF6-41E0-8DB0-EB4A7B1C228F}"
+      DTS:ObjectName="p_ArchiveFolder">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\Users\skutuwa\Desktop\ssis\RetailETL\Archive</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{07D76F1D-B1B8-43D0-B324-AEAEF5FCEE7D}"
+      DTS:ObjectName="p_ErrorFolder">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\Users\skutuwa\Desktop\ssis\RetailETL\Error</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{00ED7C5B-D846-432E-9917-03AA54195C36}"
+      DTS:ObjectName="p_SourceFolder">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\Users\skutuwa\Desktop\ssis\RetailETL\Input</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F312FEBC-1208-44D8-9784-B37E7898C967}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{61EEE284-3C27-44B0-86C7-B63EC0143C35}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CurrentFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A0683936-A1A7-4ECB-82E4-4EE221A844DC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CurrentFIlePath">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B0CEE980-7CC4-4789-AC5D-32498747DEA2}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="EndTime">
+      <DTS:VariableValue
+        DTS:DataType="7">9/16/2026 7:57:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CF0C0BC1-C543-4110-B26A-C913E297AB6A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileImportID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{08897A54-9874-4D82-8576-EC8D53940987}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProcessingStatus">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{473E4419-C38F-4DA8-9753-84120A5A281A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordsInserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5B9217B5-8017-4B3C-92EF-6E9E10EE7F37}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordsRead">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A3A22DE5-3DD0-4A44-AD7A-C77A257D621A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordsRejected">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F1E547EE-F9F7-4DD6-BAAE-F43076C8CE5C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StartTime">
+      <DTS:VariableValue
+        DTS:DataType="7">9/16/2026 7:57:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute Package Task_LoadProducts"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{EA9DCE5E-0A4C-46DC-8870-7BF12CCDEC98}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Package Task_LoadProducts"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>LoadProducts.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Package Task_LoadProduts"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{6D4CE2C7-F26D-4823-A73C-B541D5DF06F4}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Package Task_LoadProduts"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>LoadProducts.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Package Task_LoadSales"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{1001225E-7E2E-4C43-87A9-D2DE9D0C6EB5}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Package Task_LoadSales"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>LoadSales.dtsx</PackageName>
+          <PackagePassword
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbkqjESRdAUm1bB4YsZkUDQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACclYSoAICG+bAofaw44EQXcHxO89N+xdFRRV8uQ+36YwAAAAAOgAAAAAIAACAAAADyHvJLWDbR8R5Wia7Sq/KrW15X6pvceUVeijfXmUA+lxAAAADx/GH1Gz30sExiJEJmKw5yQAAAAAYy8HQtR2I2Sv4ByuhTfFPxnm3zRe+8fx5gwwctSxUPB0F7sIFmbOdUjKNJeaLtQROcT/8KXR4WNO5wEzp7fHM</PackagePassword>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Package Task_LoadStores"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{F07D716A-D2B5-451F-AC6F-6DDA9844E9C8}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Package Task_LoadStores"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>LoadStores.dtsx</PackageName>
+          <PackagePassword
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbkqjESRdAUm1bB4YsZkUDQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAGIvSLiC0PaOPfoYwKmXoTVZTxDl4o+hzL5WRnqsJJcQAAAAAOgAAAAAIAACAAAAAXZ4X942nU+CN0/7UamwW9thMh+r1LwLW1BJuOhCNfiBAAAADVi9p970hQuVtzhLD1MfclQAAAAMwX7MF2Q+ZGAVJjO8CiyqO8vsoI0vGDrXjkcxwBkYa0qLaaqDSNHlY6Ah3khhFP/vXfjibX+W75Sh90pfgEiJU</PackagePassword>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Package Task__LoadCustomer"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{A8590BC2-AD31-4C3B-952E-54AC2D55B95C}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Package Task__LoadCustomer"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>LoadCustomers.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task_Insert_FileImport"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{E37E6E6F-9DB4-4742-99E3-C22C7C25E8D4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task_Insert_FileImport"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}"
+          SQLTask:SqlStatementSource="INSERT INTO dbo.FileImports (FileName, FileImportStatus, CreatedDate) VALUES (?, 'Received', SYSDATETIME()); SELECT CAST(SCOPE_IDENTITY() AS INT) AS FileImportID;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="FileImportID"
+            SQLTask:DtsVariableName="User::FileImportID" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::CurrentFileName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task_Update_FileImport_Success"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F3A228DB-A24F-4044-A0E0-E34E4CEF817A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task_Update_FileImport_Success"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}"
+          SQLTask:SqlStatementSource="UPDATE dbo.FileImports SET FileImportStatus = 'Successfully Loaded', UpdatedDate = SYSDATETIME() WHERE FileImportID = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::FileImportID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C9A0C0E-4191-467B-8CE9-2B8DD95461E4}"
+      DTS:From="Package\Execute Package Task_LoadStores"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute Package Task_LoadSales" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F68CDE5D-D029-45DD-B959-DA66E8D24FD6}"
+      DTS:From="Package\Execute Package Task__LoadCustomer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Execute Package Task_LoadProduts" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{F7FB8D05-3EC3-44C1-842B-CBA042DD60C5}"
+      DTS:From="Package\Execute Package Task_LoadProduts"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Execute Package Task_LoadStores" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{353759A3-1F15-4C66-9F6A-52E6DC2065D7}"
+      DTS:From="Package\Execute Package Task_LoadSales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Execute SQL Task_Update_FileImport_Success" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="270.666666666667,42.6666666666667"
+          Id="Package\Execute Package Task__LoadCustomer"
+          TopLeft="205.781240800861,165.921050809799" />
+        <NodeLayout
+          Size="260,42.6666666666667"
+          Id="Package\Execute Package Task_LoadProducts"
+          TopLeft="49.0624978067349,8.38157885534028" />
+        <NodeLayout
+          Size="254.666666666667,42.6666666666667"
+          Id="Package\Execute Package Task_LoadProduts"
+          TopLeft="150.312493280508,250.592102511706" />
+        <NodeLayout
+          Size="245.333333333334,42.6666666666667"
+          Id="Package\Execute Package Task_LoadSales"
+          TopLeft="169.374992428348,423.013153250136" />
+        <NodeLayout
+          Size="249.333333333334,42.6666666666667"
+          Id="Package\Execute Package Task_LoadStores"
+          TopLeft="147.187493420206,319.013154392035" />
+        <NodeLayout
+          Size="254.666666666667,42.6666666666667"
+          Id="Package\Execute SQL Task_Insert_FileImport"
+          TopLeft="571.874974435197,382.062025858263" />
+        <NodeLayout
+          Size="308,42.6666666666667"
+          Id="Package\Execute SQL Task_Update_FileImport_Success"
+          TopLeft="122.455351668676,513.280069552256" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="271.854160086873,361.679821058702">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.1874990081416,61.3333321914341"
+              Start="0,0"
+              End="20.1874990081416,53.8333321914341">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.6666660957171" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.6666660957171"
+                    Point2="0,30.6666660957171"
+                    Point3="4,30.6666660957171" />
+                  <mssgle:LineSegment
+                    End="16.1874990081416,30.6666660957171" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.1874990081416,30.6666660957171"
+                    Point2="20.1874990081416,30.6666660957171"
+                    Point3="20.1874990081416,34.6666660957171" />
+                  <mssgle:LineSegment
+                    End="20.1874990081416,53.8333321914341" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="341.114574134194,208.587717476466">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-63.468747520353,42.0043850352403"
+              Start="0,0"
+              End="-63.468747520353,34.5043850352403">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.0021925176202" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.0021925176202"
+                    Point2="0,21.0021925176202"
+                    Point3="-4,21.0021925176202" />
+                  <mssgle:LineSegment
+                    End="-59.468747520353,21.0021925176202" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-59.468747520353,21.0021925176202"
+                    Point2="-63.468747520353,21.0021925176202"
+                    Point3="-63.468747520353,25.0021925176202" />
+                  <mssgle:LineSegment
+                    End="-63.468747520353,34.5043850352403" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="274.749993350357,293.258769178373">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.7543852136625"
+              Start="0,0"
+              End="0,18.2543852136625">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.2543852136625" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="292.041659095015,465.679819916803">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-15.5863074263384,47.6002496354536"
+              Start="0,0"
+              End="-15.5863074263384,40.1002496354536">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.8001248177268" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.8001248177268"
+                    Point2="0,23.8001248177268"
+                    Point3="-4,23.8001248177268" />
+                  <mssgle:LineSegment
+                    End="-11.5863074263384,23.8001248177268" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-11.5863074263384,23.8001248177268"
+                    Point2="-15.5863074263384,23.8001248177268"
+                    Point3="-15.5863074263384,27.8001248177268" />
+                  <mssgle:LineSegment
+                    End="-15.5863074263384,40.1002496354536" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
