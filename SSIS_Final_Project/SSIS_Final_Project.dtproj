@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">ICS-LT-2YLQZ33</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbkqjESRdAUm1bB4YsZkUDQAAAAACAAAAAAAQZgAAAAEAACAAAADzDjZ68vIV3kvxjy15Z/IRaLwNZJLIgdKZuNTirDWwkQAAAAAOgAAAAAIAACAAAAAyzmuGvpJjEkjqtc1rAtzWfTcwM5DO0CO/MOmWPG13rpAAAAAnU3eW2jjtTjPpbw3sMi52tnCejKa8iUcKauFpt9epx0O+cnBbMVMUjykfnHKKqFHmMkd7EIIe1pJrUiZrHOSUqfwtmEfcFDM7dip8PKAfI/zgM/EAUEqrx1eYoc/78lspon3cXH5MCVKysQUQiViSs3IVm4LgslCsmYs0C7Dx/0roAQ70OrdJ4PZKJdOQVOlAAAAArvGeV3EqxMxj0KhtpMFgovaRpN8/9uAvumPxb0eQ7a91LixhLvrfH/0QRbi2RZAfn7+qIUT95sG1RakmS43mrQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbkqjESRdAUm1bB4YsZkUDQAAAAACAAAAAAAQZgAAAAEAACAAAADjvohPfKWB2KyizxR+xt/gvmuFUzaJg7MRYEM7dLdaWwAAAAAOgAAAAAIAACAAAAADXpsSvk20SuBHRpuMi8G157k7+T1XP5eCF1g2BqZOl5AAAAA0tTVjP1m5bZoSlJgwx6ev430KRBDSt9OpK0sPNDhsEgt2ZnAa65jH6MtjmJKX0bZD1bbaI+Lyd2iBkVXsKvSi3pb9qlAN9n1EPyOoVnQut2an1nTT8obhUg/qcCaxShIWMfJbKUm3xUznSqKAYKM8KQqVmPRfRTYK3fDvYbFXxMS+HGN79kGDyX4FBSL70FBAAAAAp3qBeg4dlXEJRdHNmjpMMy/Bq2Rb8z/1sYGs/DBmKGyoLSdMkWU5+1X5AMe9oiiTtANj9qmS2kCgCx2MGAxd8g==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -37,11 +37,11 @@
           <SSIS:Package SSIS:Name="LoadSales.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
-          <SSIS:ConnectionManager SSIS:Name="ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.conmgr" />
+          <SSIS:ConnectionManager SSIS:Name="ConnectionManager_RetailDW.conmgr" />
         </SSIS:ConnectionManagers>
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.ConnectByProxy">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.ConnectByProxy">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -56,22 +56,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.ConnectionString">
-              <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="CreationName">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="Description">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Data Source=ICS-LT-2YLQZ33\SQLEXPRESS;User ID=sa;Initial Catalog=RetailDW;Provider=MSOLEDBSQL.1;Application Name=SSIS-SSIS_Final_Project-{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}ICS-LT-2YLQZ33\SQLEXPRESS.RetailDW.sa;Auto Translate=False;</SSIS:Property>
-                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
-              </SSIS:Properties>
-            </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.ConnectRetryCount">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.ConnectRetryCount">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -86,7 +71,7 @@
                 <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.ConnectRetryInterval">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.ConnectRetryInterval">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -101,7 +86,7 @@
                 <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.ConnectUsingManagedIdentity">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.ConnectUsingManagedIdentity">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -116,7 +101,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.InitialCatalog">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.InitialCatalog">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -127,11 +112,10 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">RetailDW</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.Password">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.Password">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -145,7 +129,7 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.RetainSameConnection">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.RetainSameConnection">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -160,7 +144,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.ServerName">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.ServerName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -175,7 +159,7 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa.UserName">
+            <SSIS:Parameter SSIS:Name="CM.ConnectionManager_RetailDW.UserName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -186,7 +170,6 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">sa</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -198,10 +181,10 @@
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">31</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">44</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{456090DA-E396-43AC-B032-7BFA35F05B98}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{C9CD1710-2A88-443D-8215-060B4EE40068}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -258,10 +241,10 @@
                 <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">51</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">152</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{B0E8B350-9071-460E-A266-FF7F2D4ABD61}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{7DB9DB29-FCD6-493A-BA3B-4D650FF3F81A}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -473,10 +456,10 @@
                 <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">36</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">86</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{A1F43538-7EC3-4777-B877-414B0FDE1015}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{60EED347-4189-45C2-B68B-E4C1733D10BB}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -703,10 +686,10 @@
                 <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">18</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">28</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{B1BF26C2-CA0F-402B-ACB1-C8355733EDC4}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{8561B1FB-ED22-4ED4-B356-2DB12708681D}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -918,10 +901,10 @@
                 <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">127</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">195</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{0CB1C34F-3337-4D38-B03D-05C7D0FE1E04}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{5A038268-89F6-4047-8E20-25AA920D9175}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>

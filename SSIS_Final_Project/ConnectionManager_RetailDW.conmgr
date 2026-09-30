@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="ConnectionManager_RetailDW"
+  DTS:DTSID="{796A58D8-436D-472D-A6F1-F45B449D9391}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::ConnectionString]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=ICS-LT-2YLQZ33\SQLEXPRESS; User ID=sa; Password=#*Happysoul1510*#; Initial Catalog=RetailDW; Provider=MSOLEDBSQL.1; Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

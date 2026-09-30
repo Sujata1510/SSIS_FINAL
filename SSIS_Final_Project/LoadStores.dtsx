@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="21"
-  DTS:VersionGUID="{171D4851-2D5F-49D4-8BAA-7524A1F37E5E}">
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{D48C697A-D9B8-47CA-8782-288CBBE4D843}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -78,7 +78,7 @@
       DTS:CreationName=""
       DTS:DTSID="{D1C11ECA-3574-46FC-80C5-E54CCAD0363A}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="@[User::ArchiveFolder] + &quot;\\&quot; + @[User::CurrentFileName]"
+      DTS:Expression="@[$Project::ArchiveFolder] + &quot;\\&quot; + @[User::CurrentFileName]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ArchiveFilePath">
@@ -115,6 +115,8 @@
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{9E4F4CF7-2E77-41C1-821D-019AC9A69EDE}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::InputFolder]&#xA;+ &quot;\\&quot;&#xA;+ @[User::CurrentFileName]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="CurrentFilePath">
@@ -134,12 +136,12 @@
       DTS:CreationName=""
       DTS:DTSID="{192A62CF-24EA-4B27-8551-09E8ACBBD50B}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="@[User::ArchiveFolder] + &quot;\\&quot; + @[User::CurrentFileName]"
+      DTS:Expression="@[$Project::ErrorFolder] + &quot;\\&quot; + @[User::CurrentFileName]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="ErrorFilePath">
       <DTS:VariableValue
-        DTS:DataType="8">C:\Users\skutuwa\Desktop\ssis\RetailETL\Archive\Stores.csv</DTS:VariableValue>
+        DTS:DataType="8">C:\Users\skutuwa\Desktop\ssis\RetailETL\Error\Stores.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -159,6 +161,15 @@
       <DTS:VariableValue
         DTS:DataType="8"
         xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F16B4D32-A68D-447E-9B9A-ABB8D62C8B2F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileImportID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -969,18 +980,16 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
-    StoreID
-FROM DimStore;</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT StoreKey, StoreID
+FROM DimStore</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT
-    StoreID
-FROM DimStore;) [refTable]
-where [refTable].[StoreID] = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT StoreKey, StoreID
+FROM DimStore) "refTable"
+where "refTable"."StoreID" = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -1011,7 +1020,7 @@ where [refTable].[StoreID] = ?</property>
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StoreID" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StoreKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreID" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
@@ -1029,8 +1038,8 @@ where [refTable].[StoreID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Data Flow Task_LoadStores\Lookup_ExistingStore.Connections[OleDbConnection]"
-                  connectionManagerID="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa]"
+                  connectionManagerID="{796A58D8-436D-472D-A6F1-F45B449D9391}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ConnectionManager_RetailDW]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -1158,7 +1167,7 @@ where [refTable].[StoreID] = ?</property>
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">3</property>
+                  typeConverter="AccessMode">0</property>
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
@@ -1179,8 +1188,8 @@ where [refTable].[StoreID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Data Flow Task_LoadStores\OLE DB Destination_DimStore.Connections[OleDbConnection]"
-                  connectionManagerID="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa]"
+                  connectionManagerID="{796A58D8-436D-472D-A6F1-F45B449D9391}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ConnectionManager_RetailDW]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1321,7 +1330,7 @@ where [refTable].[StoreID] = ?</property>
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">3</property>
+                  typeConverter="AccessMode">0</property>
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
@@ -1342,8 +1351,8 @@ where [refTable].[StoreID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Data Flow Task_LoadStores\OLE DB Destination_DuplicateStoreReject.Connections[OleDbConnection]"
-                  connectionManagerID="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa]"
+                  connectionManagerID="{796A58D8-436D-472D-A6F1-F45B449D9391}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ConnectionManager_RetailDW]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1469,7 +1478,7 @@ where [refTable].[StoreID] = ?</property>
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">3</property>
+                  typeConverter="AccessMode">0</property>
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
@@ -1490,8 +1499,8 @@ where [refTable].[StoreID] = ?</property>
               <connections>
                 <connection
                   refId="Package\Data Flow Task_LoadStores\OLE DB Destination_RejectedStores.Connections[OleDbConnection]"
-                  connectionManagerID="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[ICS-LT-2YLQZ33_SQLEXPRESS.RetailDW.sa]"
+                  connectionManagerID="{796A58D8-436D-472D-A6F1-F45B449D9391}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ConnectionManager_RetailDW]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1774,7 +1783,7 @@ where [refTable].[StoreID] = ?</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}"
+          SQLTask:Connection="{796A58D8-436D-472D-A6F1-F45B449D9391}"
           SQLTask:SqlStatementSource="INSERT INTO dbo.ETLAudit (PackageName, SourceFile, StartTime, Status, RecordsRead, RecordsInserted, RecordsRejected) VALUES (?, ?, SYSDATETIME(), 'Started', 0, 0, 0); SELECT CAST(SCOPE_IDENTITY() AS INT);"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
@@ -1796,6 +1805,40 @@ where [refTable].[StoreID] = ?</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Execute SQL Task_InsertFileImport"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{420dca18-f3d7-4c9c-8c28-5d001eb655d5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task_InsertFileImport"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{796A58D8-436D-472D-A6F1-F45B449D9391}"
+          SQLTask:SqlStatementSource="INSERT INTO dbo.FileImports (FileName, ArchivePath, FileImportStatus, CreatedDate,UpdatedDate) VALUES (?, ?, 'Received', SYSDATETIME(),SYSDATETIME()); SELECT CAST(SCOPE_IDENTITY() AS INT) AS FileImportID;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="FileImportID"
+            SQLTask:DtsVariableName="User::FileImportID" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::CurrentFileName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ArchiveFilePath"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Execute SQL Task_SetStartTime"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -1808,7 +1851,7 @@ where [refTable].[StoreID] = ?</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}"
+          SQLTask:Connection="{796A58D8-436D-472D-A6F1-F45B449D9391}"
           SQLTask:SqlStatementSource="Select GETDATE();"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
@@ -1830,7 +1873,7 @@ where [refTable].[StoreID] = ?</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}"
+          SQLTask:Connection="{796A58D8-436D-472D-A6F1-F45B449D9391}"
           SQLTask:SqlStatementSource="UPDATE ETLAudit&#xA;SET&#xA;    EndTime = SYSDATETIME(),&#xA;    Status = 'Failed',&#xA;    RecordsRead = ?,&#xA;    RecordsInserted = ?,&#xA;    RecordsRejected = ?,&#xA;    ErrorMessage = ?&#xA;WHERE AuditID = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
@@ -1878,7 +1921,7 @@ where [refTable].[StoreID] = ?</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{767C6A92-33E7-4E2B-8C87-E73F6ADCC049}"
+          SQLTask:Connection="{796A58D8-436D-472D-A6F1-F45B449D9391}"
           SQLTask:SqlStatementSource="UPDATE dbo.ETLAudit SET EndTime = SYSDATETIME(), Status = 'Success', RecordsRead = ?, RecordsInserted = ?, RecordsRejected = ? WHERE AuditID = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
@@ -1952,11 +1995,11 @@ where [refTable].[StoreID] = ?</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{8FD00742-26D6-4412-B88D-ABE1B82EE251}"
+      DTS:DTSID="{F8B2ED0B-C3B5-4EE0-8158-5C236F613899}"
       DTS:From="Package\Execute SQL Task_SetStartTime"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Execute SQL Task_InsertETLAudit" />
+      DTS:To="Package\Execute SQL Task_InsertFileImport" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
@@ -1998,6 +2041,14 @@ where [refTable].[StoreID] = ?</property>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
       DTS:To="Package\File System Task_MoveToError" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{3A02FA75-3DBA-4377-83E8-54CC255F82F2}"
+      DTS:From="Package\Execute SQL Task_InsertFileImport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Execute SQL Task_InsertETLAudit" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2014,55 +2065,57 @@ where [refTable].[StoreID] = ?</property>
         <NodeLayout
           Size="214.666666666667,42.6666666666667"
           Id="Package\Data Flow Task_LoadStores"
-          TopLeft="150.624993266538,172.42105073843" />
+          TopLeft="151.874993210659,260.684207664055" />
         <NodeLayout
           Size="245.333333333334,42.6666666666667"
           Id="Package\Execute SQL Task_InsertETLAudit"
-          TopLeft="143.124993601814,88.9473674444281" />
+          TopLeft="143.124993601814,165.578945550397" />
         <NodeLayout
           Size="236,42.6666666666667"
           Id="Package\Execute SQL Task_SetStartTime"
-          TopLeft="149.374993322418,8.21052622563952" />
+          TopLeft="140.624993713573,7.105427357601E-15" />
+        <NodeLayout
+          Size="268,42.6666666666667"
+          Id="Package\Execute SQL Task_UpdateAudit_Failed"
+          TopLeft="298.749986644835,335.947364732417" />
         <NodeLayout
           Size="252,42.6666666666667"
           Id="Package\Execute SQL Task_UpdateETLAudit"
-          TopLeft="0.62499997206001,261.368418182858" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="266.583326795449,50.8771928923062">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.0701745521219"
-              Start="0,0"
-              End="0,30.5701745521219">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.5701745521219" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="0.62499997206001,337.999996288827" />
+        <NodeLayout
+          Size="241.333333333334,42.6666666666667"
+          Id="Package\File System Task_MoveToArchive"
+          TopLeft="19.37499913387,426.263153214452" />
+        <NodeLayout
+          Size="229.333333333334,42.6666666666667"
+          Id="Package\File System Task_MoveToError"
+          TopLeft="339.999984800816,413.947363875992" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="261.874993434176,131.614034111095">
+          TopLeft="226.236104712925,208.245612217064">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.8070166273355"
+              EndConnector="32.9722218310668,52.4385954469913"
               Start="0,0"
-              End="0,33.3070166273355">
+              End="32.9722218310668,44.9385954469913">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.3070166273355" />
+                    End="0,17.1793031286984" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.1793031286984"
+                    Point2="0,21.1793031286984"
+                    Point3="4,21.1793031286984" />
+                  <mssgle:LineSegment
+                    End="28.9722218310668,21.1793031286984" />
+                  <mssgle:CubicBezierSegment
+                    Point1="28.9722218310668,21.1793031286984"
+                    Point2="32.9722218310668,21.1793031286984"
+                    Point3="32.9722218310668,25.1793031286984" />
+                  <mssgle:LineSegment
+                    End="32.9722218310668,44.9385954469913" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2073,30 +2126,30 @@ where [refTable].[StoreID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="223.513882155427,215.087717405097">
+          TopLeft="224.763882099547,303.350874330722">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-96.8888821833668,46.2807007777616"
+              EndConnector="-98.1388821274875,34.6491219581054"
               Start="0,0"
-              End="-96.8888821833668,38.7807007777616">
+              End="-98.1388821274875,27.1491219581054">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,14.7177186869369" />
+                    End="0,10.0134549966197" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,14.7177186869369"
-                    Point2="0,18.7177186869369"
-                    Point3="-4,18.7177186869369" />
+                    Point1="0,10.0134549966197"
+                    Point2="0,14.0134549966197"
+                    Point3="-4,14.0134549966197" />
                   <mssgle:LineSegment
-                    End="-92.8888821833668,18.7177186869369" />
+                    End="-94.1388821274875,14.0134549966197" />
                   <mssgle:CubicBezierSegment
-                    Point1="-92.8888821833668,18.7177186869369"
-                    Point2="-96.8888821833668,18.7177186869369"
-                    Point3="-96.8888821833668,22.7177186869369" />
+                    Point1="-94.1388821274875,14.0134549966197"
+                    Point2="-98.1388821274875,14.0134549966197"
+                    Point3="-98.1388821274875,18.0134549966197" />
                   <mssgle:LineSegment
-                    End="-96.8888821833668,38.7807007777616" />
+                    End="-98.1388821274875,27.1491219581054" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2105,53 +2158,45 @@ where [refTable].[StoreID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="268,42.6666666666667"
-          Id="Package\Execute SQL Task_UpdateAudit_Failed"
-          TopLeft="298.749986644835,259.315786626448" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="292.402771044316,215.087717405097">
+          TopLeft="293.652770988436,303.350874330722">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="140.347215600519,44.2280692213514"
+              EndConnector="139.097215656399,32.5964904016953"
               Start="0,0"
-              End="140.347215600519,36.7280692213514">
+              End="139.097215656399,25.0964904016953">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.8875545062926" />
+                    End="0,9.18329081597543" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13.8875545062926"
-                    Point2="0,17.8875545062926"
-                    Point3="4,17.8875545062926" />
+                    Point1="0,9.18329081597543"
+                    Point2="0,13.1832908159754"
+                    Point3="4,13.1832908159754" />
                   <mssgle:LineSegment
-                    End="136.347215600519,17.8875545062926" />
+                    End="135.097215656399,13.1832908159754" />
                   <mssgle:CubicBezierSegment
-                    Point1="136.347215600519,17.8875545062926"
-                    Point2="140.347215600519,17.8875545062926"
-                    Point3="140.347215600519,21.8875545062926" />
+                    Point1="135.097215656399,13.1832908159754"
+                    Point2="139.097215656399,13.1832908159754"
+                    Point3="139.097215656399,17.1832908159754" />
                   <mssgle:LineSegment
-                    End="140.347215600519,36.7280692213514" />
+                    End="139.097215656399,25.0964904016953" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="54.9322601440095,22.8875545062926,30.4826953125,9.7490234375"
+              BoundingBox="54.3072601719493,18.1832908159754,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="241.333333333334,42.6666666666667"
-          Id="Package\File System Task_MoveToArchive"
-          TopLeft="19.37499913387,349.631575108483" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="126.62499997206,304.035084849525">
+          TopLeft="126.62499997206,380.666662955494">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2183,13 +2228,9 @@ where [refTable].[StoreID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="229.333333333334,42.6666666666667"
-          Id="Package\File System Task_MoveToError"
-          TopLeft="339.999984800816,337.315785770023" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="432.749986644835,301.982453293115">
+          TopLeft="432.749986644835,378.614031399084">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2213,6 +2254,54 @@ where [refTable].[StoreID] = ?</property>
                     Point3="21.9166648226482,21.6666662384543" />
                   <mssgle:LineSegment
                     End="21.9166648226482,27.8333324769086" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="248,42.6666666666667"
+          Id="Package\Execute SQL Task_InsertFileImport"
+          TopLeft="136.874993881211,84.8421043316084" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="259.749993797392,42.6666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.1754376649417"
+              Start="0,0"
+              End="0,34.6754376649417">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.6754376649417" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="263.333327074846,127.508770998275">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.070174552122"
+              Start="0,0"
+              End="0,30.570174552122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.570174552122" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2649,7 +2738,7 @@ where [refTable].[StoreID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-2.39880841819659,44.9035080995612,16,16"
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
